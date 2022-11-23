@@ -16,8 +16,6 @@ sudo ./build.sh or sh build.sh or bash build.sh
 * docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}\t{{.State}}\t{{.CreatedAt}}"
 * docker image prune -f
 
-* docker-compose --profile flower up -d
-
 * docker rmi -f $(docker images -aq) -> remove all images
 
 * docker stop $(docker ps -a -q) -> stop all containers
@@ -50,3 +48,11 @@ sudo ./build.sh or sh build.sh or bash build.sh
 
 * Copy from container to host
     sudo docker cp airflow-data_airflow-worker_1:/opt/airflow/webserver_config.py ~/sc
+
+### GET ACTIVE PORTS ON UBUNTU
+-----------------------------------------------
+* sudo ss -ltn (list active ports)
+* sudo netstat -lnp (list ports)
+* sudo kill -9 `sudo lsof -t -i:9001`(kill port)
+If that doesn't work, you could also use $() for command interpolation:
+sudo kill -9 $(sudo lsof -t -i:9001) (kill port)
